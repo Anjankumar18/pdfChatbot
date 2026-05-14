@@ -22,8 +22,8 @@ COPY main.py         .
 # Create directories
 RUN mkdir -p chroma_db pdfs .streamlit
 
-# Copy streamlit config if exists
-COPY .streamlit/ .streamlit/
+# # Copy streamlit config if exists
+# COPY .streamlit/ .streamlit/
 
 EXPOSE 8000
 
