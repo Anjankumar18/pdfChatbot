@@ -7,7 +7,12 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
+    gcc \
+    g++ \
     && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip first
+RUN pip install --upgrade pip
 
 # Install Python dependencies
 COPY requirements.txt .
@@ -22,10 +27,9 @@ COPY main.py         .
 # Create directories
 RUN mkdir -p chroma_db pdfs .streamlit
 
-# # Copy streamlit config if exists
+# # Copy streamlit config
 # COPY .streamlit/ .streamlit/
 
 EXPOSE 8000
 
-# Default: run FastAPI
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
